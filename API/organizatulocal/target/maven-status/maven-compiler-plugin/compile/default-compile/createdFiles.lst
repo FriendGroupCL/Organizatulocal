@@ -1,6 +1,5 @@
 com\organizatulocal\jpa\sessions\RolFacade.class
 com\organizatulocal\jpa\entities\Rol_.class
-ApplicationConfig.class
 com\organizatulocal\jpa\sessions\UsuarioFacade.class
 com\organizatulocal\jpa\entities\Usuario_.class
 com\organizatulocal\jpa\sessions\CategoriaFacade.class
