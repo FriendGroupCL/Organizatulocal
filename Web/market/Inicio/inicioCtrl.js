@@ -4,20 +4,21 @@
     //document.getElementById("login").style.display = "none";
     //document.getElementById("todo").style.display = "block";
     console.log("home controller reached");
-    //var parametros=[];
-    $.getJSON("http://localhost:8080/organizatulocal/webresourse/Categoria", function (data) {
-                  $scope.categorias=[];
-                  
-                  for (i = 0; i < data.length; i++) {
-                      var categoria={};
-                      
-                      categoria=data[i];
-                      $scope.categorias.push(categoria);
-                     //$scope.categorias = JSON.stringify(data);
-                  }
-                  console.log($scope.categorias);
-                  //localStorage.setItem('configuracion.portal.' + ambiente, JSON.stringify(parametros));
-               });
+    
+      var req = {
+                    method: 'PUT',
+                    url: "http://localhost:8080/OrganizaTuLocal_API/webresources/Categorias/1",
+                    data:{
+                    "descripcion": "Productos no perecibles",
+                    "id": 1,
+                    "nombre": "Abarrotes",
+                    "productoBarraList": [],
+                    "productoEspecialList": []
+                    }
+                }
+                $http(req).then(function (response) {
+                    console.log(JSON.stringify(response))
+                });
     //console.log(JSON.stringify($scope.categorias));
 });
 })();
