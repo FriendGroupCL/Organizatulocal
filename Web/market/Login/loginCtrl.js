@@ -8,6 +8,8 @@
     	clave: ""
     };
     
+    var hash = CryptoJS.SHA3("Message", { outputLength: 512 });
+    console.log("mi hash"+hash);
     $scope.submit=function(){
     	var nombre=$scope.user.nombre;
     	var clave=$scope.user.clave;
