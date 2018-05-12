@@ -13,6 +13,7 @@
     	var clave=$scope.user.clave;
     	if(nombre=='admin' && clave=='admin'){
             localStorage.setItem("sesion", true);
+            $('#exampleModal').modal('hide');
     		$location.path('/')
     	}
     }
