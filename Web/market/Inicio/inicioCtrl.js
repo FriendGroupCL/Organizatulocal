@@ -1,8 +1,9 @@
 (function () {
     angular.module('myApp').controller("inicioCtrl", function ($scope, $location, $http) {
-        
+    if(Boolean(localStorage.getItem("sesion"))!=true){ $location.path('/login') }
     //document.getElementById("login").style.display = "none";
     //document.getElementById("todo").style.display = "block";
+    
     console.log("home controller reached");
     
       var req = {
@@ -19,6 +20,10 @@
                 $http(req).then(function (response) {
                     console.log(JSON.stringify(response))
                 });
+    $scope.logout=function(){
+        localStorage.removeItem("sesion");
+        $('#exampleModal').modal('hide');
+    }
     //console.log(JSON.stringify($scope.categorias));
 });
 })();
