@@ -7,6 +7,7 @@ package com.organizatulocal.rest.services;
 
 import com.organizatulocal.jpa.entities.Usuario;
 import com.organizatulocal.jpa.sessions.UsuarioFacade;
+import static com.organizatulocal.rest.services.Encriptacion.sr;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -37,7 +38,24 @@ public class UsuarioRest {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     public void create(Usuario usuario){
-        ejbUsuarioFacade.create(usuario);
+        
+        System.out.println("CLAVE QUE VIENE DESDE ANGULARJS "+usuario.getClave());
+        String clave = "FooBar1234567890"; // 128 bit
+        byte[] iv = new byte[16];
+        sr.nextBytes(iv);
+        String claveEncriptada = Encriptacion.encriptar(clave, iv, usuario.getClave());
+        System.out.println("CLAVE ENCRIPTADA  "+claveEncriptada);
+        usuario.setClave(claveEncriptada);
+        String desencriptar = Encriptacion.decriptar(clave, iv, claveEncriptada);
+        System.out.println("CLAVE DESENCRIPTADA DESDE HASH "+desencriptar);
+        /*String clave = "FooBar1234567890"; // 128 bit
+        byte[] iv = new byte[16];
+        sr.nextBytes(iv);
+        String encriptado = encriptar(clave, iv, usuario.getClave());
+        usuario.setClave(encriptado);
+        System.out.println("Usuario"+usuario);*/
+        //ejbUsuarioFacade.create(usuario);
+        System.out.println("USUARIO CREADO CON CLAVE HASHEADA "+ usuario.getClave()+" "+usuario.getCorreo()+" "+usuario.getNombre()+" "+usuario.getLocalId()+" "+usuario.getRolId()+" ESTADO "+usuario.getEstado());
     }
     
     @PUT

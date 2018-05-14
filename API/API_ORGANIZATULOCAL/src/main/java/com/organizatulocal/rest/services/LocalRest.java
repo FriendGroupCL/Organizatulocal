@@ -6,7 +6,9 @@
 package com.organizatulocal.rest.services;
 
 import com.organizatulocal.jpa.entities.Local;
+import com.organizatulocal.jpa.entities.Rol;
 import com.organizatulocal.jpa.sessions.LocalFacade;
+import com.organizatulocal.jpa.sessions.RolFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -22,7 +24,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author jotac
  */
-@Path("Locales")
+@Path("Local")
 public class LocalRest {
     
     @EJB
@@ -37,7 +39,6 @@ public class LocalRest {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     public void create(Local local){
-        System.out.println("ESTA LLEGANDO"+local.getRazonSocial());
         ejbLocalFacade.create(local);
     }
     
