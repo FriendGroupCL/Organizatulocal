@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="Organizatulocal">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title> Organiza Tu local </title>
+    
+    <!--Dependencias de AngularJS-->
+    <script src="angular-1.6.9/angular.min.js"></script>
+    <script src="angular-1.6.9/angular-route.min.js"></script>
+    <!--Fin Dependencias de AngularJS-->
+    
+    
+    <!--Dependencias de Template-->
+     
+    <!--Fin Dependencias de Template-->
+    
+    <script src="Controllers/HomeController.js"></script>
+    
+</head>
+<body ng-controller="PrimerController">
+{{"Hola Mundo "+ nombre}}
+<button ng-click="CrearUsuario()">Clickeame LOCO :V</button>
+    
+    <label ng-repeat="nombre in dataObj">
+        <p>{{nombre.nombre}}</p>
+    </label>
+</body>
+</html>
