@@ -2,14 +2,14 @@ var app = angular.module("Organizatulocal",[]);
 app.controller("PrimerController", function($scope,$http){
     
     $scope.nombre="ANGULAR ES EL MEJOR";
-    //var url="http://localhost:8080/OrganizaTuLocal_API/webresources/Categorias"
+    //var url="http://localhost:21970/OrganizaTuLocal_API/webresources/Categorias"
     
     //obtener datos
     $scope.ObtenerCategorias = function(){
         
         $http({   
                   method: 'GET',
-                  url: 'http://localhost:8080/OrganizaTuLocal_API/webresources/Categorias'
+                  url: 'http://localhost:21970/OrganizaTuLocal_API/webresources/Categorias'
                }).then(function (response){
             
                         var myJSON = JSON.stringify(response.data);
@@ -36,7 +36,7 @@ app.controller("PrimerController", function($scope,$http){
         
         $http({   
                   method: 'POST',
-                  url: 'http://localhost:8080/OrganizaTuLocal_API/webresources/Usuarios',
+                  url: 'http://localhost:21970/OrganizaTuLocal_API/webresources/Usuarios',
                   data : { 
                             "nombre":"Fermin Mariante",
                             "correo":"jotacardenas90@gmail.com",
@@ -67,7 +67,7 @@ app.controller("PrimerController", function($scope,$http){
         
         $http({   
                   method: 'POST',
-                  url: 'http://localhost:8080/API_ORGANIZATULOCAL/webresources/Rol',
+                  url: 'http://localhost:21970/API_ORGANIZATULOCAL/webresources/Rol',
                   data : { 
                             "nombre":"Vendedor",
                             "descripcion":"Rol que se le asigna a un usuario para acceder a todas las funcionalidades asociadas a ventas de un local"
@@ -93,7 +93,7 @@ app.controller("PrimerController", function($scope,$http){
         
         $http({   
                   method: 'POST',
-                  url: 'http://localhost:8080/API_ORGANIZATULOCAL/webresources/Local',
+                  url: 'http://localhost:21970/API_ORGANIZATULOCAL/webresources/Local',
                   data : { 
                             
                             "rut": "99999999-9",
@@ -113,8 +113,8 @@ app.controller("PrimerController", function($scope,$http){
                 );
     };
     
-    $scope.local={};
-    $scope.rol={};
+    $scope.local=[];
+    $scope.rol=[];
     $scope.dataObj;
     $scope.CrearUsuario = function(){
         
@@ -125,7 +125,7 @@ app.controller("PrimerController", function($scope,$http){
         //obteniendo los datos del local
         $http({   
                   method: 'GET',
-                  url: 'http://localhost:8080/API_ORGANIZATULOCAL/webresources/Local/1',
+                  url: 'http://localhost:21970/API_ORGANIZATULOCAL/webresources/Local/1',
                }).then(function(response){
                      // success callback
                        if (response){
@@ -148,14 +148,22 @@ app.controller("PrimerController", function($scope,$http){
         //obteniendo los datos del rol
         $http({   
                   method: 'GET',
-                  url: 'http://localhost:8080/API_ORGANIZATULOCAL/webresources/Rol/1',
+                  url: 'http://localhost:21970/API_ORGANIZATULOCAL/webresources/Rol/1',
                }).then(function(response){
                      // success callback
                        if (response){
-                           
+                           var row={};
+                           var rol=response.data;
+                           console.log(JSON.stringify(rol));
                            //$scope.local = JSON.stringify(response.data);
-                           $scope.rol = JSON.stringify(response.data);
-                           $scope.dataObj = JSON.parse($scope.rol);
+                           for(var i=0;i<rol.length;i++){
+                               row.id=response.id;
+                               row.nombre=response.nombre;
+                               row.descripcion=response.descripcion;
+                           }
+                           $scope.rol.push(row);
+                           //$scope.rol.push(JSON.stringify(response.data));
+                           //$scope.dataObj = JSON.parse($scope.rol);
                            //console.log("respuesta como un stringify " + $scope.local);
                            console.log("DATOS DEL ROLCITO " + $scope.dataObj.nombre + "DESCRIPCION "+ $scope.dataObj.descripcion);
                        }
@@ -166,11 +174,11 @@ app.controller("PrimerController", function($scope,$http){
                    }
                 );
         
-        console.log("LOCAL DE SCOPE"+ $scope.local);
+        console.log("Mis roles"+ JSON.stringify($scope.rol));
         //Enviando los datos
         $http({   
                   method: 'POST',
-                  url: 'http://localhost:8080/API_ORGANIZATULOCAL/webresources/Usuario',
+                  url: 'http://localhost:21970/API_ORGANIZATULOCAL/webresources/Usuario',
                   data : { 
                             
                             "nombre": "Fermin Mariante",
@@ -199,7 +207,7 @@ app.controller("PrimerController", function($scope,$http){
         
         $http({   
                   method: 'GET',
-                  url: 'http://localhost:8080/API_ORGANIZATULOCAL/webresources/Local/'+id,
+                  url: 'http://localhost:21970/API_ORGANIZATULOCAL/webresources/Local/'+id,
                }).then(function(response){
                      // success callback
                        if (response){
@@ -222,7 +230,7 @@ app.controller("PrimerController", function($scope,$http){
         
        $http({   
                   method: 'PUT',
-                  url: 'http://localhost:8080/OrganizaTuLocal_API/webresources/Roles/'+id,
+                  url: 'http://localhost:21970/OrganizaTuLocal_API/webresources/Roles/'+id,
                   data : {
                             "id": id, 
                             "nombre":"VAMOS A VER",

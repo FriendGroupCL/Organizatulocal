@@ -55,7 +55,7 @@ public class UsuarioRest {
         System.out.println("Usuario"+usuario);*/
         //ejbUsuarioFacade.create(usuario); hay que buscar el local y el rol por la id que viene de angular
         System.out.println("USUARIO CREADO CON CLAVE HASHEADA "+ usuario.getClave()+" "+usuario.getCorreo()+" "+usuario.getNombre()+" "+usuario.getLocalId().getId()+" "+usuario.getRolId()+" ESTADO "+usuario.getEstado());
-        //ejbUsuarioFacade.create(usuario);
+        ejbUsuarioFacade.create(usuario);
     }
     
     @PUT
